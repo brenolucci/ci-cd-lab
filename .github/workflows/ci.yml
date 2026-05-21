@@ -21,7 +21,7 @@ jobs:
       - name: Intentional failure
         run: |
           echo "Checking for forbidden word..."
-          if grep -r "lasanha" .; then
+          if grep -r "lasanha" . --exclude-dir=.github; then
             echo "FAIL: forbidden word found!"
             exit 1
           else
