@@ -17,4 +17,8 @@ jobs:
 
       - name: Simulate a passing check
         run: echo "All checks passed!"
-        
+
+      - name: Intentional failure
+        run: |
+          echo "Checking for forbidden word..."
+          grep -r "forbidden" . && exit 1 || echo "Clean!"
