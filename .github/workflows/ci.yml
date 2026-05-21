@@ -1,0 +1,29 @@
+name: CI pipeline
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print hello
+        run: cat hello.txt
+
+      - name: Simulate a passing check
+        run: echo "All checks passed!"
+
+      - name: Intentional failure
+        run: |
+          echo "Checking for forbidden word..."
+          if grep -r "lasanha" . --exclude-dir=.github; then
+            echo "FAIL: forbidden word found!"
+            exit 1
+          else
+            echo "Clean!"
+          fi
