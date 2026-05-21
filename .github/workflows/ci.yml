@@ -21,4 +21,9 @@ jobs:
       - name: Intentional failure
         run: |
           echo "Checking for forbidden word..."
-          grep -r "lasanha" . && exit 1 || echo "Clean!"
+          if grep -r "lasanha" .; then
+            echo "FAIL: forbidden word found!"
+            exit 1
+          else
+            echo "Clean!"
+          fi
